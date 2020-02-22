@@ -121,5 +121,17 @@
         };
     }
 
+    // 削除する処理を追加
+    const deleatTodo = function (index) {
+        todos.splice(index, 1);
+        todos.forEach(function (todo, index) {
+            todo.id = index + 1;
+        })
+        for (let i = 0; i < radioBtn.children.length; i++) {
+            if (radioBtn.children[i].checked === true) {
+                changeTodoDisplay(radioBtn.children[i].value);
+            };
+        };
+    };
 
 }
