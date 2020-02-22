@@ -5,6 +5,7 @@
     const submitBtn = document.getElementById('submitBtn');
     const formInputSection = document.getElementById('formInput');
     const outputElem = document.getElementById('output');
+    const radioBtn = document.getElementById('display');
 
     submitBtn.addEventListener('click', function () {
         addTodo();
@@ -62,4 +63,23 @@
             tr.appendChild(deleatBtnElem);
         })
     };
+
+    // 作業中↔︎完了の表示を切り替える処理
+
+    const swithBtn = function (stateBtn) {
+        if (stateBtn.textContent === "作業中") {
+            stateBtn.textContent = "完了";
+        } else {
+            stateBtn.textContent = "作業中";
+        };
+
+        for (let i = 0; i < radioBtn.children.length; i++) {
+            if (radioBtn.children[i].checked === true) {
+                chanegTodoDisplay(radioBtn.children[i].value);
+                console.log(radioBtn.children[0].value);
+            }
+        }
+    }
+
+
 }
