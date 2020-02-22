@@ -19,7 +19,7 @@
         const deleatBtn = document.createElement('button');
         stateBtn.textContent = "作業中";
         stateBtn.classList.add('state_btn');
-        deleteBtn.classList.add('delete_btn');
+        deleatBtn.classList.add('delete_btn');
         deleatBtn.textContent = "削除";
         const todo = {
             id: '',
@@ -35,5 +35,4 @@
             todo.id = index + 1;
         })
     }
-
 }
