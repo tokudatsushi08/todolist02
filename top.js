@@ -11,6 +11,10 @@
         addTodo();
     });
 
+    radioBtn.addEventListener('change', function (event) {
+        changeTodoDisplay(event.target.value);
+    });
+
     // todoを追加する処理
     const addTodo = function () {
         const content = formInputSection.value;
@@ -19,9 +23,12 @@
         }
         const stateBtn = document.createElement('button');
         const deleatBtn = document.createElement('button');
-        stateBtn.textContent = "作業中";
         stateBtn.classList.add('state_btn');
         deleatBtn.classList.add('delete_btn');
+        stateBtn.textContent = "作業中";
+        stateBtn.addEventListener('click', function () {
+            swithBtn(stateBtn);
+        });
         deleatBtn.textContent = "削除";
         const todo = {
             id: '',
@@ -36,7 +43,19 @@
         todos.forEach(function (todo, index) {
             todo.id = index + 1;
         })
-    }
+        deleatBtn.addEventListener('click', function () {
+            const index = todos.indexOf(todo);
+            deleatTodo(index);
+        });
+
+        for (let i = 0; i < radioBtn.children.length; i++) {
+            if (radioBtn.children[i].checked === true) {
+                changeTodoDisplay(radioBtn.children[i].value);
+            };
+        };
+
+        formInputSection.value = '';
+    };
 
     // todoを表示する処理
 
@@ -52,7 +71,7 @@
             const contentElem = document.createElement('td');
             const stateElem = document.createElement('td');
             const deleatBtnElem = document.createElement('td');
-            id.idElem.textContent = todo.id;
+            idElem.textContent = todo.id;
             contentElem.textContent = todo.content;
             stateElem.appendChild(todo.stateBtn);
             deleatBtnElem.appendChild(todo.deleatBtn);
@@ -75,10 +94,31 @@
 
         for (let i = 0; i < radioBtn.children.length; i++) {
             if (radioBtn.children[i].checked === true) {
-                chanegTodoDisplay(radioBtn.children[i].value);
-                console.log(radioBtn.children[0].value);
+                changeTodoDisplay(radioBtn.children[i].value);
+                console.log(radioBtn.children[i].value);
             }
         }
+    }
+
+    // radioボタンでの切り替え
+    const changeTodoDisplay = function (radioBtnState) {
+        console.log(radioBtnState);
+        if (radioBtnState === 'all') {
+            todoShow(todos);
+        };
+        if (radioBtnState === 'working') {
+            const filterTodo = todos.filter(function (todo) {
+                return todo.stateBtn.textContent === "作業中";
+            });
+            todoShow(filterTodo);
+            console.log(filterTodo);
+        };
+        if (radioBtnState === 'complete') {
+            const filterTodo = todos.filter(function (todo) {
+                return todo.stateBtn.textContent === "完了";
+            })
+            todoShow(filterTodo);
+        };
     }
 
 
