@@ -4,6 +4,7 @@
     const todos = [];
     const submitBtn = document.getElementById('submitBtn');
     const formInputSection = document.getElementById('formInput');
+    const outputElem = document.getElementById('output');
 
     submitBtn.addEventListener('click', function () {
         addTodo();
@@ -35,4 +36,30 @@
             todo.id = index + 1;
         })
     }
+
+    // todoを表示する処理
+
+    const todoShow = function (todos) {
+
+        while (outputElem.firstChild) {
+            outputElem.textContent = '';
+        };
+
+        todos.forEach(function (todo) {
+            const tr = document.createElement('tr');
+            const idElem = document.createElement('td');
+            const contentElem = document.createElement('td');
+            const stateElem = document.createElement('td');
+            const deleatBtnElem = document.createElement('td');
+            id.idElem.textContent = todo.id;
+            contentElem.textContent = todo.content;
+            stateElem.appendChild(todo.stateBtn);
+            deleatBtnElem.appendChild(todo.deleatBtn);
+            outputElem.appendChild(tr);
+            tr.appendChild(idElem);
+            tr.appendChild(contentElem);
+            tr.appendChild(stateElem);
+            tr.appendChild(deleatBtnElem);
+        })
+    };
 }
